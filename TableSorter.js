@@ -33,16 +33,18 @@ var TableSorter = (function($) {
 					var aSplited = $(a).find('.dom-buy').data('date').split('.'),
 						bSplited = $(b).find('.dom-buy').data('date').split('.'),
 						dateA = new Date( /*year*/aSplited[2], /*month*/aSplited[1], /*day*/aSplited[0] ),
-						dateB = new Date( /*year*/bSplited[2], /*month*/bSplited[1], /*day*/bSplited[0] );
-
-					return dateA > dateB ? 1 : -1;
+						dateB = new Date( /*year*/bSplited[2], /*month*/bSplited[1], /*day*/bSplited[0] ),
+						dateATime = dateA.getTime(),
+						dateBTime = dateB.getTime();
+					// if values are equal, we compare by name to sort different parts of table by names
+					return dateATime > dateBTime ? 1 : ( dateATime === dateBTime ? sortFunctions.sortByName(a, b) : -1 );
 				},
 
 				sortByPrice: function(a, b) {
 					var priceA = parseInt( $(a).find('.dom-price').data('price'), 10 ),
 						priceB = parseInt( $(b).find('.dom-price').data('price'), 10 );
-
-					return priceA > priceB ? 1 : -1; 
+					// if values are equal, we compare by name to sort different parts of table by names
+					return priceA > priceB ? 1 : ( priceA === priceB ? sortFunctions.sortByName(a, b) : -1); 
 				}
 			};
 
@@ -143,12 +145,12 @@ var TableSorter = (function($) {
 			var currentElement = $(this),
 				sortType = currentElement.parent().data('sort-type');
 
-			e.preventDefault();
-			e.stopPropagation();
-
 			if ($.inArray(sortType, availableSorts) === -1) {
 				sortType = availableSorts[0]; // 'name' by default
 			}
+
+			e.preventDefault();
+			e.stopPropagation();
 
 			if (sortType === self.sortedState) return; // disable sort repeating
 
