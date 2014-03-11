@@ -13,11 +13,11 @@ var TableSorter = (function($) {
     var availableSorts = ['name', 'date', 'price'];
 
     /**
-     * Sorts incoming rows list
+     * Sorts incoming rows list.
      *
-     * @param {Array} rowList - tbody rows array
-     * @param {String} sortBy - sort by name/date/price
-     * @returns {Array} - sorted rows list
+     * @param {Array} rowList - tbody rows array.
+     * @param {String} sortBy - sort by name/date/price.
+     * @returns {Array} - sorted rows list.
      */
     var sortRows = function(rowsList, sortBy) {
         var sortedRowsList,
@@ -51,17 +51,14 @@ var TableSorter = (function($) {
 
         switch (sortBy) {
             case 'name':
-                // console.log('sorted by name');
                 sortedRowsList = rowsList.sort( sortFunctions.sortByName );
                 break;
 
             case 'date':
-                // console.log('sorted by date');
                 sortedRowsList = rowsList.sort( sortFunctions.sortByDate );
                 break;
 
             case 'price':
-                // console.log('sorted by price');
                 sortedRowsList = rowsList.sort( sortFunctions.sortByPrice );
                 break;
 
@@ -119,8 +116,9 @@ var TableSorter = (function($) {
 
 
     /**
-     * Inserts rows list in table
+     * Inserts rows list in table.
      *
+     * @public
      * @param {Array} rowsList - sorted rows list
      */
     TableSorter.prototype.showSortedRows = function(rowsList) {
@@ -131,7 +129,7 @@ var TableSorter = (function($) {
      * TableSorter initialisation, sets
      * all event callbacks.
      *
-     * Public.
+     * @public
      */
     TableSorter.prototype.init = function() {
         var self = this;
