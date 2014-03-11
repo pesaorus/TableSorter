@@ -1,0 +1,19 @@
+# Simple table sorter
+
+By default table is sorted by name (domain name) and can be sorted by name, date and price.
+
+All needed data to sort table is stored in td data- attributes.
+
+## Usage
+
+```js
+$(function() {
+    var tableSorter = new TableSorter($('#your_table_id'));
+    tableSorter.init();
+});
+```
+
+## Contacts
+
+<alexandr.deineko@gmail.com>
+
