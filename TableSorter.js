@@ -114,7 +114,7 @@ var TableSorter = (function($) {
 		// sorted state, by defauld is 'name' (sorted by name)
 		this.sortedState = 'name';
 		// cash for sort results
-		this.cashedSorts = {};
+		this.cachedSorts = {};
 	};
 
 
@@ -136,9 +136,9 @@ var TableSorter = (function($) {
 	TableSorter.prototype.init = function() {
 		var self = this;
 
-		// first cash - initial rows order
-		if (!this.cashedSorts['name']) {
-			this.cashedSorts['name'] = this.rowsArray.slice();
+		// first cache - initial rows order
+		if (!this.cachedSorts['name']) {
+			this.cachedSorts['name'] = this.rowsArray.slice();
 		}
 
 		this.jqElems.$headers.on('click', function(e) {
@@ -159,11 +159,11 @@ var TableSorter = (function($) {
 			currentElement.addClass('sorted').addClass('can_not_sort_more');
 
 			// looking for cash
-			if (!self.cashedSorts[sortType]) {
-				self.cashedSorts[sortType] = sortRows( self.rowsArray, sortType ).slice();
+			if (!self.cachedSorts[sortType]) {
+				self.cachedSorts[sortType] = sortRows( self.rowsArray, sortType ).slice();
 			}
 
-			self.showSortedRows( recoloriseRows( self.cashedSorts[sortType] ) );
+			self.showSortedRows( recoloriseRows( self.cachedSorts[sortType] ) );
 
 			self.jqElems.$table.trigger('table:redraw');
 
